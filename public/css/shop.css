@@ -1,0 +1,170 @@
+#shop{
+    margin-top:10px;
+}
+#f1,#f2,#f3,#f4{
+    float:left
+}
+.time{
+    width:100%;
+    height:50px;
+    background:url("../image/jd1.gif")
+}
+.time>span{
+    color:#fff;
+    float:left;
+    padding:15px 0 15px 790px;
+    display: inline-block;
+    font-size:18px
+}
+.time-main{
+    float:left;
+    text-align:center;
+    position:relative;
+}
+.time-item{
+    width:32px;
+    height:32px;
+    background:#662928;
+    float:left;
+    margin:10px;
+    border-radius:10%
+}
+.time-item>span{
+    color:#fff;
+    font-size: 20px;
+    font-family: 微软雅黑;
+    display: inline-block;
+}
+.yd1,.yd2{
+    font-size:20px;
+    font-weight:bold;
+}
+.yd1{
+    position:absolute;
+    top:9px;
+    left:48px;
+}
+.yd2{
+    position:absolute;
+    top:9px;
+    left:100px;
+}
+.shop-item{
+    width:25%;
+    float:left;
+    padding:0 10px 20px 10px;
+    background:#fff;
+    box-shadow: 0px -3px 10px rgba(0,0,0,.2);
+}
+.shop-img{
+    padding:20px;
+    text-align: center;
+}
+.price>li{
+    float:left;
+    width:50%;
+    text-align: center;
+    border:1px solid #e83632;
+}
+.shop-item h5{
+    color:#666;
+    margin-bottom: 20px;
+    font-family: 微软雅黑;
+}
+.shop-item h5:hover{
+    color:#c81623;
+}
+.f1-item{
+    width:32%;
+    height:450px;
+    padding:0 20px;
+    margin-right:10px;
+    box-shadow: 0px -3px 10px rgba(0,0,0,.2);
+    float:left;
+    border:1px solid #e6e6e6;
+}
+.title{
+    width:100%;
+    text-align: center;
+    padding-top:20px
+}
+.title>h3{
+    padding-right:20px;
+    font-weight: bold;
+}
+.title>h5{
+    padding:5px 10px;
+    color:#666;
+    font-family: 微软雅黑;
+    font-weight: bold;
+}
+.title>ul>li>a{
+    font-weight: bold;
+    font-size:16px;
+    color:#666
+}
+.title>h3,.title>h5,.title>a{
+    float:left
+}
+.title,.p1{
+    float:left;
+    width:100%;
+    text-align: center;
+    padding-top:30px
+}
+.p2{
+    float:left;
+    width:100%;
+    text-align: center;
+    padding-top:10px
+}
+.ul1{
+    padding-top:20px;
+    float:left;
+    width:100%
+}
+.ul1>li{
+    float:left;
+    padding:0 5px
+}
+.ul2{
+    float:left;
+    padding-top:25px;
+}
+.ul2>li{
+    float:left;
+    padding:0 4px
+}
+.f1_item{
+    width:32%;
+    height:450px;
+    padding:0 20px;
+    margin-right:10px;
+    float:left;
+    position:relative;
+    z-index:-1
+}
+.border{
+    width:340px;
+    height:450px;
+    border:5px solid #000;
+    position:absolute;
+    top:20px;
+    left:50px;
+    z-index:-1;
+}
+#title1,#title2,#title3{
+    margin:20px;
+    float:left
+}
+.title2{
+    padding-top:20px;
+}
+.title2>img,.title>a{
+    float:left
+}
+.title2>a{
+    padding-top:12px;
+    display:inline-block;
+
+}

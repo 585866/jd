@@ -1,0 +1,612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>商城网上商城</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/css.css" />
+		<link rel="stylesheet" href="css/top.css">
+		<link rel="stylesheet" href="css/product.css">
+		<link rel="stylesheet" href="css/base.css">
+		<link rel="stylesheet" href="css/search.css">
+		<!--<link rel="stylesheet" href="css/bootstrap.css">-->
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var region = $("#region");
+				var address = $("#address");
+				var number_this = $("#number_this");
+				var name = $("#name_");
+				var phone = $("#phone");
+				$("#sub_setID").click(function() {
+					var input_out = $(".input_style");
+					for (var i = 0; i <= input_out.length; i++) {
+						if ($(input_out[i]).val() == "") {
+							$(input_out[i]).css("border", "1px solid red");
+							
+							return false;
+						} else {
+							$(input_out[i]).css("border", "1px solid #cccccc");
+						}
+					}
+				});
+				var span_momey = $(".span_momey");
+				var b = 0;
+				for (var i = 0; i < span_momey.length; i++) {
+					b += parseFloat($(span_momey[i]).html());
+				}
+				var out_momey = $(".out_momey");
+				out_momey.html(b);
+				$(".shade_content").hide();
+				$(".shade").hide();
+				$('.nav_mini ul li').hover(function() {
+					$(this).find('.two_nav').show(100);
+				}, function() {
+					$(this).find('.two_nav').hide(100);
+				})
+				$('.left_nav').hover(function() {
+					$(this).find('.nav_mini').show(100);
+				}, function() {
+					$(this).find('.nav_mini').hide(100);
+				})
+				$('#jia').click(function() {
+					$('input[name=num]').val(parseInt($('input[name=num]').val()) + 1);
+				})
+				$('#jian').click(function() {
+					$('input[name=num]').val(parseInt($('input[name=num]').val()) - 1);
+				})
+				$('.Caddress .add_mi').click(function() {
+					$(this).css('background', 'url("images/mail_1.jpg") no-repeat').siblings('.add_mi').css('background', 'url("images/mail.jpg") no-repeat')
+				})
+			})
+			var x = Array();
+
+			function func(a, b) {
+				x[b] = a.html();
+				alert(x)
+				a.css('border', '2px solid #f00').siblings('.min_mx').css('border', '2px solid #ccc');
+			}
+
+			function onclick_close() {
+				var shade_content = $(".shade_content");
+				var shade = $(".shade");
+				if (confirm("确认关闭么！此操作不可恢复")) {
+					shade_content.hide();
+					shade.hide();
+				}
+			}
+
+			function onclick_open() {
+				$(".shade_content").show();
+				$(".shade").show();
+				var input_out = $(".input_style");
+				for (var i = 0; i <= input_out.length; i++) {
+					if ($(input_out[i]).val() != "") {
+						$(input_out[i]).val("");
+					}
+				}
+			}
+
+			function onclick_remove(r) {
+				if (confirm("确认删除么！此操作不可恢复")) {
+					var out_momey = $(".out_momey");
+					var input_val = $(r).parent().prev().children().eq(1).val();
+					var span_html = $(r).parent().prev().prev().children().html();
+					var out_add = parseFloat(input_val).toFixed(2) * parseFloat(span_html).toFixed(2);
+					var reduce = parseFloat(out_momey.html()).toFixed(2)- parseFloat(out_add).toFixed(2);
+					console.log(parseFloat(reduce).toFixed(2));
+					out_momey.text(parseFloat(reduce).toFixed(2))
+					$(r).parent().parent().remove();
+				}
+			}
+
+			function onclick_btnAdd(a) {
+				var out_momey = $(".out_momey");
+				var input_ = $(a).prev();
+				var input_val = $(a).prev().val();
+				var input_add = parseInt(input_val) + 1;
+				input_.val(input_add);
+				var btn_momey = parseFloat($(a).parent().prev().children().html());
+				var out_momey_float = parseFloat(out_momey.html()) + btn_momey;
+				out_momey.text(out_momey_float.toFixed(2));
+			}
+
+			function onclick_reduce(b) {
+				var out_momey = $(".out_momey");
+				var input_ = $(b).next();
+				var input_val = $(b).next().val();
+				if (input_val <= 1) {
+					alert("商品个数不能小于1！")
+				} else {
+					var input_add = parseInt(input_val) - 1;
+					input_.val(input_add);
+					var btn_momey = parseFloat($(b).parent().prev().children().html());
+					var out_momey_float = parseFloat(out_momey.html()) - btn_momey;
+					out_momey.text(out_momey_float.toFixed(2));
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="top">
+		<div class="container">
+			<ul class="city">
+				<li style="float:left"><a href="index.html"><span class="index"></span>京东首页</a></li>
+				<li class="dropdown" id="drop-city" style="margin-left:85px">
+					<div class="city-icon">
+						<i class="iconfont"></i>
+						<span>北京</span>
+					</div>
+					<div class="drop-play">
+						<div class="item"><a class="selected" style="background:#f10215;color:#fff" href="">北京</a></div>
+						<div class="item"><a href="">上海</a></div>
+						<div class="item"><a href="">天津</a></div>
+						<div class="item"><a href="">重庆</a></div>
+						<div class="item"><a href="">河北</a></div>
+						<div class="item"><a href="">山西</a></div>
+						<div class="item"><a href="">河南</a></div>
+						<div class="item"><a href="">辽宁</a></div>
+						<div class="item"><a href="">吉林</a></div>
+						<div class="item"><a href="">黑龙江</a></div>
+						<div class="item"><a href="">内蒙古</a></div>
+						<div class="item"><a href="">江苏</a></div>
+						<div class="item"><a href="">山东</a></div>
+						<div class="item"><a href="">安徽</a></div>
+						<div class="item"><a href="">浙江</a></div>
+						<div class="item"><a href="">福建</a></div>
+						<div class="item"><a href="">湖北</a></div>
+						<div class="item"><a href="">湖南</a></div>
+						<div class="item"><a href="">广东</a></div>
+						<div class="item"><a href="">广西</a></div>
+						<div class="item"><a href="">江西</a></div>
+						<div class="item"><a href="">四川</a></div>
+						<div class="item"><a href="">海南</a></div>
+						<div class="item"><a href="">贵州</a></div>
+						<div class="item"><a href="">云南</a></div>
+						<div class="item"><a href="">西藏</a></div>
+						<div class="item"><a href="">陕西</a></div>
+						<div class="item"><a href="">甘肃</a></div>
+						<div class="item"><a href="">青海</a></div>
+						<div class="item"><a href="">宁夏</a></div>
+						<div class="item"><a href="">新疆</a></div>
+						<div class="item"><a href="">港澳</a></div>
+						<div class="item"><a href="">台湾</a></div>
+						<div class="item"><a href="">钓鱼岛</a></div>
+						<div class="item"><a href="">海外</a></div>
+					</div>
+				</li>
+			</ul>
+			<ul class="info">
+				<li class="ttbar-login">
+					<a href="" class="link-login">您好 , 请登录 </a>
+					<a href="" class="link-resign">免费注册</a>
+				</li>
+				<li class="spacer"></li>
+				<li class="ttbar-dt"><a href="">我的订单</a></li>
+				<li class="spacer"></li>
+				<li class="ttbar-jd" id="drop-jd" style="margin:0px">
+					<div class="jd-icon">
+						<a href="">我的京东</a>
+						<i class="iconfont"></i>
+					</div>
+					<div class="jd-play">
+						<div class="user-logo">
+							<a href="" class="logo"><img src="img/user.jpg" alt=""></a>
+							<div class="user-login"><a href="">你好，请登录</a></div>
+							<br>
+							<div class="u-extra"><a href="">优惠</a>丨<a href="">消息</a></div>
+						</div>
+						<div class="jd-left">
+							<ul>
+								<li><a href="">待订单处理</a></li>
+								<li><a href="">我的问答</a></li>
+								<li><a href="">降价商品</a></li>
+								<li><a href="">返修退换货</a></li>
+							</ul>
+						</div>
+						<div class="jd-right">
+							<ul>
+								<li><a href="">我的关注</a></li>
+								<li><a href="">我的京豆</a></li>
+								<li><a href="">我的理财</a></li>
+								<li><a href="">京东白条</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="spacer"></li>
+				<li><a href="">京东会员</a></li>
+				<li class="spacer"></li>
+				<li><a href="">企业采购</a></li>
+				<li class="spacer"></li>
+				<li class="ttbar-user" id="drop-user" style="margin:0px">
+					<div class="user-icon">
+						<a href="">客户服务</a>
+						<i class="iconfont"></i>
+					</div>
+					<div class="user-play">
+						<div class="item-client">客户</div>
+						<div class="item"><a href="">帮助中心</a></div>
+						<div class="item"><a href="">售后服务</a></div>
+						<div class="item"><a href="">在线客服</a></div>
+						<div class="item"><a href="">电话客服</a></div>
+						<div class="item"><a href="">意见建议</a></div>
+						<div class="item"><a href="">客服邮箱</a></div>
+						<div class="clearfix"></div>
+						<div class="item-business">商户</div>
+						<div class="item"><a href="">京东商学院</a></div>
+						<div class="item"><a href="">商家入驻</a></div>
+					</div>
+				</li>
+				<li class="spacer"></li>
+				<li class="ttbar-web" id="drop-web" style="margin:0px">
+					<div class="web-icon">
+						<a href="">网站导航</a>
+						<i class="iconfont"></i>
+						<div class="web-play">
+							<dl class="fore1">
+								<dt>特色主题</dt>
+								<dd>
+									<div class="item"><a href="">品牌街</a></div>
+									<div class="item"><a href="">好物100</a></div>
+									<div class="item"><a href="">京东预售</a></div>
+									<div class="item"><a href="">尖er货</a></div>
+									<div class="item"><a href="">京东首发</a></div>
+									<div class="item"><a href="">今日团购</a></div>
+									<div class="item"><a href="">优惠券</a></div>
+									<div class="item"><a href="">闪购</a></div>
+									<div class="item"><a href="">京东会员</a></div>
+									<div class="item"><a href="">秒杀</a></div>
+									<div class="item"><a href="">定期送</a></div>
+									<div class="item"><a href="">装机大师</a></div>
+									<div class="item"><a href="">新奇特</a></div>
+									<div class="item"><a href="">京东试用</a></div>
+									<div class="item"><a href="">礼品购</a></div>
+									<div class="item"><a href="">智能馆</a></div>
+									<div class="item"><a href="">奇趣日报</a></div>
+									<div class="item"><a href="">大牌免息</a></div>
+									<div class="item"><a href="">北京老字号</a></div>
+									<div class="item"><a href="">买什么</a></div>
+								</dd>
+							</dl>
+							<dl class="fore2">
+								<dt>行业频道</dt>
+								<dd>
+									<div class="item"><a href="">服装城</a></div>
+									<div class="item"><a href="">家用电器</a></div>
+									<div class="item"><a href="">电脑办公</a></div>
+									<div class="item"><a href="">手机</a></div>
+									<div class="item"><a href="">美妆馆</a></div>
+									<div class="item"><a href="">食品</a></div>
+									<div class="item"><a href="">数码</a></div>
+									<div class="item"><a href="">母婴</a></div>
+									<div class="item"><a href="">家装城</a></div>
+									<div class="item"><a href="">运动户外</a></div>
+									<div class="item"><a href="">整车</a></div>
+									<div class="item"><a href="">图书</a></div>
+									<div class="item"><a href="">农资频道</a></div>
+									<div class="item"><a href="">京东智能</a></div>
+									<div class="item"><a href="">玩3C</a></div>
+								</dd>
+							</dl>
+							<dl class="fore3">
+								<dt>生活服务</dt>
+								<dd>
+									<div class="item"><a href="">京东众筹</a></div>
+									<div class="item"><a href="">白条</a></div>
+									<div class="item"><a href="">京东金融APP</a></div>
+									<div class="item"><a href="">京东小金库</a></div>
+									<div class="item"><a href="">理财</a></div>
+									<div class="item"><a href="">话费</a></div>
+									<div class="item"><a href="">旅行</a></div>
+									<div class="item"><a href="">彩票</a></div>
+									<div class="item"><a href="">游戏</a></div>
+									<div class="item"><a href="">机票酒店</a></div>
+									<div class="item"><a href="">电影票</a></div>
+									<div class="item"><a href="">水电煤</a></div>
+									<div class="item"><a href="">京东到家</a></div>
+									<div class="item"><a href="">京东微联</a></div>
+									<div class="item"><a href="">京东众测</a></div>
+								</dd>
+							</dl>
+							<dl class="fore4 col-lg-2">
+								<dt>更多精选</dt>
+								<dd>
+									<div class="item"><a href="">京东社区</a></div>
+									<div class="item"><a href="">京东通信</a></div>
+									<div class="item"><a href="">在线读书</a></div>
+									<div class="item"><a href="">京东E卡</a></div>
+									<div class="item"><a href="">智能社区</a></div>
+									<div class="item"><a href="">游戏社区</a></div>
+									<div class="item"><a href="">京友邦</a></div>
+									<div class="item"><a href="">卖家入驻</a></div>
+									<div class="item"><a href="">企业采购</a></div>
+									<div class="item"><a href="">服务市场</a></div>
+									<div class="item"><a href="">乡村招募</a></div>
+									<div class="item"><a href="">校园加盟</a></div>
+									<div class="item"><a href="">办公生活馆</a></div>
+									<div class="item"><a href="">知识产权维权</a></div>
+									<div class="item"><a href="">English Site</a></div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+		<div class="search">
+			<div class="container">
+				<div class="jd-search-logo"><img src="./img/search_logo.png" alt=""></div>
+				<div class="search-box">
+					<div class="form">
+						<input type="text" name="search" placeholder="羽绒服">
+						<button><i class="iconfont"><img src="./img/search.png" alt="" width="30px" height="30px"></i></button>
+						<div id="setup">
+							<i class="iconfont"></i>
+							<a href="" style=" color: #f10215;">我的购物车</a>
+							<i class="ci-count" id="shopping-amount">0</i>
+							<div class="set-play" style="color:#ccc">
+								<img src="./img/nocart.png" alt="">
+								购物车中还没有商品，赶紧选购吧!
+							</div>
+						</div>
+					</div>
+					<div class="hotwords">
+						<a href="">199减100</a>
+						<a href="">魅蓝Note5</a>
+						<a href="">花肥六折</a>
+						<a href="">每五百减60</a>
+						<a href="">家电爆品</a>
+						<a href="">围巾男</a>
+						<a href="">surface</a>
+						<a href="">5件99元</a>
+						<a href="">儿童羽绒服</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="Caddress">
+			<div class="open_new">
+				<button class="open_btn" onclick="javascript:onclick_open();">使用新地址</button>
+			</div>
+			<div class="add_mi">
+				<p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
+				<p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
+			</div>
+			<div class="add_mi">
+				<p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
+				<p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
+			</div>
+			<div class="add_mi">
+				<p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
+				<p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
+			</div>
+			<div class="add_mi">
+				<p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
+				<p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
+			</div>
+			<div class="add_mi">
+				<p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
+				<p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
+			</div>
+		</div>
+		<div class="shopping_content">
+			<div class="shopping_table">
+				<table border="1" bordercolor="#cccccc" cellspacing="0" cellpadding="0" style="width: 100%; text-align: center;">
+					<tr>
+						<th>商品图片</th>
+						<th>商品名称</th>
+						<th>商品属性</th>
+						<th>商品价格</th>
+						<th>商品数量</th>
+						<th>商品操作</th>
+					</tr>
+					<tr>
+						<td>
+							<a><img src="images/2f1.jpg" /></a>
+						</td>
+						<td><span>小消息下</span></td>
+						<td>
+							<div class="">
+								<span id="">颜色</span>：<span>白色</span>
+							</div>
+							<div class="">
+								<span id="">尺码</span>：<span>L</span>
+							</div>
+						</td>
+						<td>
+							<span class="span_momey">11.10</span>
+						</td>
+						<td>
+							<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
+							<input class="momey_input" type="" name="" id="" value="1" disabled="disabled" />
+							<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
+						</td>
+						<td>
+							<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a><img src="images/2f1.jpg" /></a>
+						</td>
+						<td><span>小消息下</span></td>
+						<td>
+							<div class="">
+								<span id="">颜色</span>：<span>白色</span>
+							</div>
+							<div class="">
+								<span id="">尺码</span>：<span>L</span>
+							</div>
+						</td>
+						<td>
+							<span class="span_momey">11.10</span>
+						</td>
+						<td>
+							<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
+							<input class="momey_input" type="" name="" id="" value="1"  disabled="disabled"/>
+							<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
+						</td>
+						<td>
+							<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a><img src="images/2f1.jpg" /></a>
+						</td>
+						<td><span>小消息下</span></td>
+						<td>
+							<div class="">
+								<span id="">颜色</span>：<span>白色</span>
+							</div>
+							<div class="">
+								<span id="">尺码</span>：<span>L</span>
+							</div>
+						</td>
+						<td>
+							<span class="span_momey">11.10</span>
+						</td>
+						<td>
+							<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
+							<input class="momey_input" type="" name="" id="" value="1"  disabled="disabled"/>
+							<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
+						</td>
+						<td>
+							<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a><img src="images/2f1.jpg" /></a>
+						</td>
+						<td><span>小消息下</span></td>
+						<td>
+							<div class="">
+								<span id="">颜色</span>：<span>白色</span>
+							</div>
+							<div class="">
+								<span id="">尺码</span>：<span>L</span>
+							</div>
+						</td>
+						<td>
+							<span class="span_momey">11.10</span>
+						</td>
+						<td>
+							<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
+							<input class="momey_input" type="" name="" id="" value="1" disabled="disabled" />
+							<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
+						</td>
+						<td>
+							<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a><img src="images/2f1.jpg" /></a>
+						</td>
+						<td><span>小消息下</span></td>
+						<td>
+							<div class="">
+								<span id="">颜色</span>：<span>白色</span>
+							</div>
+							<div class="">
+								<span id="">尺码</span>：<span>L</span>
+							</div>
+						</td>
+						<td>
+							<span class="span_momey">11.00</span>
+						</td>
+						<td>
+							<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
+							<input class="momey_input" type="" name="" id="" value="1"  disabled="disabled"/>
+							<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
+						</td>
+						<td>
+							<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>
+						</td>
+					</tr>
+				</table>
+				<div class="" style="width: 100%; text-align: right; margin-top: 10px;">
+					<div class="div_outMumey" style="float: left;">
+						总价：<span class="out_momey">11</span>
+					</div>
+					<button class="btn_closing">结算</button>
+				</div>
+			</div>
+		</div>
+		<div class="shade">
+		</div>
+		<div class="shade_content">
+			<div class="col-xs-12 shade_colse">
+				<button onclick="javascript:onclick_close();">x</button>
+			</div>
+			<div class="nav shade_content_div">
+				<div class="col-xs-12 shade_title">
+					新增收货地址
+				</div>
+				<div class="col-xs-12 shade_from">
+					<form action="" method="post">
+						<div class="col-xs-12">
+							<span class="span_style" id="">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</span>
+							<input class="input_style" type="" name="" id="region" value="" placeholder="&nbsp;&nbsp;请输入您的所在地区" />
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" id="">详细地址</span>
+							<input class="input_style" type="" name="" id="address" value="" placeholder="&nbsp;&nbsp;请输入您的详细地址" />
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" id="">邮政编号</span>
+							<input class="input_style" type="" name="" id="number_this" value="" placeholder="&nbsp;&nbsp;请输入您的邮政编号" />
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" class="span_sty" id="">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span>
+							<input class="input_style" type="" name="" id="name_" value="" placeholder="&nbsp;&nbsp;请输入您的姓名" />
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" id="">手机号码</span>
+							<input class="input_style" type="" name="" id="phone" value="" placeholder="&nbsp;&nbsp;请输入您的手机号码" />
+						</div>
+						<div class="col-xs-12">
+							<input class="btn_remove" type="button" id="" onclick="javascript:onclick_close();" value="取消" />
+							<input type="submit" class="sub_set" id="sub_setID" value="提交" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- 底部开始 -->
+		<div id="down">
+			<div class="down_top">
+				<a href="#">关于我们</a>
+				<a href="#">联系我们</a>
+				<a href="#">商家入驻</a>
+				<a href="#">营销中心</a>
+				<a href="#">手机商城</a>
+				<a href="#">友情链接</a>
+				<a href="#">销售联盟</a>
+				<a href="#">商城社区</a>
+				<a href="#">商城公益</a>
+				<a href="#" style="border-right:none">English Site</a>
+			</div>
+			<div class="down_center">
+				<span>北京市公安局朝阳分局备案编号110105014669  |  京ICP证070359号  |  <a href="#">互联网药品信息服务资格证编号(京)-经营性-2014-0008</a>  |  新出发京零 字第大120007号</span>
+				<span><a href="#">音像制品经营许可证苏宿批005号</a>  |  出版物经营许可证编号新出发(苏)批字第N-012号  |  互联网出版许可证编号新出网证(京)字150号</span>
+				<span><a href="#">网络文化经营许可证京网文[2011]0168-061号</a>  违法和不良信息举报电话：4006561155  Copyright © 2004-2014  商城JD.com 版权所有</span>
+				<span>商城旗下网站：<a href="#">360TOP</a><a href="#">拍拍网</a><a href="#">网银在线</a></span>
+			</div>
+			<div class="down_bot">
+				<img src="images/bot1.gif" alt="" />
+				<img src="images/bot2.gif" alt="" />
+				<img src="images/bot3.png" alt="" />
+				<img src="images/bot4.png" alt="" />
+			</div>
+		</div>
+		<!-- 底部结束 -->
+	</body>
+	<script src="js/top.js"></script>
+</html>

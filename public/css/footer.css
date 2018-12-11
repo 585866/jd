@@ -1,0 +1,43 @@
+.footer{
+    padding-bottom: 20px;
+}
+.help-logo{
+    width:100%;
+    text-align: center;
+    margin-bottom: 10px;
+    border-bottom:1px solid #dedede
+}
+.help-nav{
+    display:flex;
+    justify-content: space-around;
+    width:100%;
+    padding:10px 0;
+    border-bottom:1px solid #dedede;
+}
+.help-list{
+    line-height:22px;
+    width:198px;
+}
+.help-list>h5{
+    margin-bottom: 5px;
+    font-size: 14px;
+    color:#666;
+    font-family: 微软雅黑;
+    font-weight: bold;
+}
+.help-list a{
+    color:#666
+}
+.footer a:hover{
+    color:#c81623;
+}
+.copyright{
+    padding-top:15px;
+    text-align: center;
+}
+.copyright>p>a{
+    color:#666;
+}
+.copyright span{
+    margin:0 10px
+}
